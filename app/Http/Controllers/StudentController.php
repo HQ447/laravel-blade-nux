@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Student;
@@ -13,7 +14,7 @@ class StudentController extends Controller
         return view('students.index', compact('students'));
     }
 
-    // Store a new student
+
     public function store(Request $request)
     {
         $request->validate([
@@ -21,19 +22,17 @@ class StudentController extends Controller
             'email' => 'required|email|unique:students',
         ]);
 
-        Student::create($request->only('name','email'));
+        Student::create($request->only('name', 'email'));
 
         return redirect()->back()->with('success', 'Student added successfully');
     }
 
-    // Show form to edit student
     public function edit($id)
     {
         $student = Student::findOrFail($id);
         return view('students.edit', compact('student'));
     }
 
-    // Update student
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -42,7 +41,7 @@ class StudentController extends Controller
         ]);
 
         $student = Student::findOrFail($id);
-        $student->update($request->only('name','email'));
+        $student->update($request->only('name', 'email'));
 
         return redirect()->route('students.index')->with('success', 'Student updated successfully');
     }

@@ -1,3 +1,6 @@
+<?php
+$idx=1;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,14 +30,15 @@
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Role</th>
         <th>Action</th>
     </tr>
-
     @foreach($students as $student)
     <tr>
-        <td>{{ $student->id }}</td>
+        <td>{{ $idx++ }}</td>
         <td>{{ $student->name }}</td>
         <td>{{ $student->email }}</td>
+      <td>{{ $student->name == "luqman" ? "Admin" : "Student" }}</td>  
         <td>
             <a href="{{ route('students.edit', $student->id) }}">Edit</a>
             <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline">
